@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 
 
 
@@ -60,14 +61,17 @@ namespace ConsoleApp1
 
             //use flag to track the boolean when checking prime number
             Boolean flag = true;
+            //create a stringh to hold all prime numbers
+            string primeNum = "";
             foreach (string line in result)
                 {
                 int eachLine = Convert.ToInt32(line);
                 total += eachLine;
+                //strat from 4 because 1, 2, 3 are prime numbers
                 if (eachLine > 3)
                     {
                     // find the prime number
-                    for (int i = 2; i < eachLine; i++)
+                for (int i = 2; i < eachLine; i++)
                         {
                         if (eachLine % i == 0)
                             {
@@ -75,22 +79,26 @@ namespace ConsoleApp1
                             break;
                             }
                         else { 
-                            flag = true; 
+                            flag = true;
+                            
+
                             }
                         }
                     }
-                if (flag)
+                else 
                     {
-                    Console.WriteLine($"{eachLine} is a prime number");
+                    flag = true;
                     }
-                else
-                    {
-                    Console.WriteLine($"{eachLine} is not a prime number");
-                    }       
+
+                if (flag)
+                   {
+                    primeNum += line + " ";
+                    }
+                    
                 }
 
             Console.WriteLine($"The total number in the list is {total}");
-
+            Console.WriteLine($"The prime numbers are: {primeNum}");
 
 
 
