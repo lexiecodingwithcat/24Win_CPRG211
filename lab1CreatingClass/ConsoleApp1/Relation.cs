@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+
 
 
 namespace ConsoleApp1
@@ -12,9 +12,6 @@ namespace ConsoleApp1
             {
             this.RelationshipType = relationshipType;
             }
-
-
-            List<string> relationshipType = new List<string> { "mother", "father", "sister", "brother" };
 
             public void ShowRelationship(Person person1, Person person2)
                 {

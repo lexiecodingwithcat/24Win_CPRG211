@@ -8,10 +8,10 @@ namespace ConsoleApp1
         {
         
             int personId;
-           public string firstName;
+            public string firstName;
             string lastName;
-            string favoriteColor;
-            int age;
+            public string favoriteColor;
+            public int age;
             bool isWorking;
 
             public Person(int id, string fstName, string laName, string color, int personAge, bool workSate)
@@ -37,8 +37,7 @@ namespace ConsoleApp1
 
             public void GetAgeInTenYears()
                 {
-                age += 10;
-                Console.WriteLine($"{firstName}{lastName}'s Age in 10 years is:{age}");
+                Console.WriteLine($"{firstName}{lastName}'s Age in 10 years is:{age+10}");
                 }
 
             public void ToStringnew()
