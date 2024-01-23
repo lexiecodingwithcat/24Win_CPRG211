@@ -15,7 +15,7 @@ namespace ConsoleApp1
 
             public void ShowRelationship(Person person1, Person person2)
                 {
-                Console.WriteLine($"Relationship between {person1.firstName} and {person2.firstName} is {RelationshipType}hood");
+                Console.WriteLine($"Relationship between {person1.firstName} and {person2.firstName} is: {RelationshipType}hood");
                 }
         }
     }

@@ -25,7 +25,7 @@ namespace ConsoleApp1
             //Display Gina’s information as a sentence
             gina.DisplayPersonInfo();
             //Display all of Mike’s information as a list.
-            mike.ToStringnew();
+            Console.WriteLine(mike.ToString());
             //Change Ian’s Favorite Colour to white, and then print his information as a sentence.
             lan.ChangeFavoriteColour();
             lan.DisplayPersonInfo();
@@ -49,10 +49,9 @@ namespace ConsoleApp1
            foreach(Person person in listOfPpl) 
                 {
                 totalAge += person.age;
-                Console.WriteLine(person.age);
                 }
             double average = (double)totalAge / number;
-            Console.WriteLine($"Average age is: {totalAge}{number}{average}");
+            Console.WriteLine($"Average age is: {average}");
 
             //The youngest person and the oldest person
             List<int> ageList = new List<int>
@@ -79,8 +78,8 @@ namespace ConsoleApp1
                     }
                 }
 
-            Console.WriteLine($"The youngest persion is: {youngName}");
-            Console.WriteLine($"The oldest persion is: {oldName}");
+            Console.WriteLine($"The youngest person is: {youngName}");
+            Console.WriteLine($"The oldest person is: {oldName}");
 
             //The names of the people whose first names start with M
             foreach(Person person in listOfPpl)
@@ -88,15 +87,17 @@ namespace ConsoleApp1
                 char firstLetter = person.firstName[0];
                 if ( firstLetter =='M')
                     {
-                    person.ToStringnew();
+                    Console.WriteLine(person.ToString());
                     }
                 }
-            foreach(Person person in listOfPpl)
+
+            //The person information of the person that likes the colour blue
+            foreach (Person person in listOfPpl)
                 {
                 string color = person.favoriteColor;
                 if (color == "Blue")
                     {
-                    person.ToStringnew();
+                    Console.WriteLine(person.ToString());
                     }
                 }
 

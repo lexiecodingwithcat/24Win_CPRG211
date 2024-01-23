@@ -1,0 +1,32 @@
+2: Gina James's favorite color is Green
+PersonId: 3
+FirstName: Mike
+LastName: Briscoe
+FavoriteColour: Blue
+Age: 45
+IsWroking: True
+1: Lan Brooks's favorite color is white
+MaryBeals's Age in 10 years is:38
+Relationship between Gina and Mary is sisterhood
+Relationship between Lan and Mike is brotherhood
+Average age is: 30.25
+The youngest persion is: Gina
+The oldest persion is: Mike
+PersonId: 3
+FirstName: Mike
+LastName: Briscoe
+FavoriteColour: Blue
+Age: 45
+IsWroking: True
+PersonId: 4
+FirstName: Mary
+LastName: Beals
+FavoriteColour: Yellow
+Age: 28
+IsWroking: True
+PersonId: 3
+FirstName: Mike
+LastName: Briscoe
+FavoriteColour: Blue
+Age: 45
+IsWroking: True
