@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
-using System.Xml.Linq;
+
+
 namespace ConsoleApp1
     {
    class Program
@@ -22,6 +21,12 @@ namespace ConsoleApp1
             List<double> wageList = new List<double>();
             //creat a list to save all salaried employees
             List<double> salariedList = new List<double>();
+            //number of salaried employee
+            int salariedNum = 0;
+            //number of wages employee
+            int wagesNum = 0;
+            //number of part-time employee
+            int ptNum = 0;
             foreach (string line in result)
                 {
                 //split the line 
@@ -40,6 +45,7 @@ namespace ConsoleApp1
                     obj.Salary = double.Parse(data[7]);
                     employeeList.Add(obj);
                     salariedList.Add(obj.Salary);
+                    salariedNum++;
                     }
                 //wages
                 else if ('5' <= firstDigit && firstDigit <= '7')
@@ -49,6 +55,7 @@ namespace ConsoleApp1
                     obj.Hour = int.Parse(data[8]);
                     employeeList.Add(obj);
                     wageList.Add(obj.WeeklySalary());
+                    wagesNum++;
                     }
                 //part-time employee
                 else if ('8' <= firstDigit && firstDigit <= '9')
@@ -57,6 +64,7 @@ namespace ConsoleApp1
                     obj.Rate = double.Parse(data[7]);
                     obj.Hour = int.Parse(data[8]);
                     employeeList.Add(obj);
+                    ptNum++;
                     }
                 }
             //the number of objects is the length of the list
@@ -75,7 +83,7 @@ namespace ConsoleApp1
             //find the object with highest and lowest salary
             string maxName = "";
             string minName = "";
-            Console.WriteLine(maxWage);
+            //Console.WriteLine(maxWage);
             foreach (Employee obj in employeeList)
                 {
                 if(maxWage == obj.Salary)
@@ -90,6 +98,13 @@ namespace ConsoleApp1
             Console.WriteLine($"The highest weekly pay is {maxWage} by {maxName}");
             Console.WriteLine($"The lowest weekly pay is {minSalaried} by {minName}");
 
+          
+            double wagePer = Math.Round((double) wagesNum/ employeeNo,4)*100;
+            double salariedPer = Math.Round( (double)salariedNum / employeeNo,4)* 100;
+            double ptPer = Math.Round((double)ptNum / employeeNo,4) * 100;
+            Console.WriteLine($"The percentage of wages employees is: {wagePer}%");
+            Console.WriteLine($"The percentage of salaried employees is: {salariedPer}%");
+            Console.WriteLine($"The percentage of part-time employees is: {ptPer}%");
 
             Console.ReadLine();
             }
