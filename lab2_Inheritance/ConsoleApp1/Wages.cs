@@ -20,12 +20,17 @@ namespace ConsoleApp1
             {
             if(Hour <= 40)
                 {
-                return Rate*Hour;
+                Salary = Rate * Hour;
+                return Salary;
                 }
             else
                 {
-                return (Rate*40+Rate*(Hour-40)*1.5);
+                Salary = Rate * 40 + Rate * (Hour - 40) * 1.5;
+                return Salary;
                 }
             }
+
+
+      
         }
     }

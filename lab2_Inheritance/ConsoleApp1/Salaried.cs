@@ -6,7 +6,7 @@ namespace ConsoleApp1
     {
     class Salaried:Employee
         {
-        public double Salary { get; set; }
+
 
         //parameter constructor 
         public Salaried(string id, string name, string address, string phone, long sin)

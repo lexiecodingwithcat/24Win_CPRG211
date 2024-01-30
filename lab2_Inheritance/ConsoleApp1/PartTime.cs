@@ -7,6 +7,7 @@ namespace ConsoleApp1
         {
         public double Rate { get; set; }
         public int Hour {  get; set; }
+        
         public PartTime(string id, string name, string address, string phone, long sin)
             {
             Id = id;
@@ -17,7 +18,8 @@ namespace ConsoleApp1
             }
         public override double WeeklySalary()
             {
-            return (Rate * Hour);
+            Salary = Rate * Hour;
+            return Salary;
             }
         }
     }

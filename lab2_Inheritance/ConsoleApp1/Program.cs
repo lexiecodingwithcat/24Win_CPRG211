@@ -16,8 +16,12 @@ namespace ConsoleApp1
             List <string> result = new List<string>();
             result = File.ReadAllLines(filePath).ToList();
             //a.Fill a list with objects based on the supplied data file.
-            //creat a list to add objects
+            //creat a list to add all objects
             List<Employee> employeeList = new List<Employee>();
+            //creat a list to save all wages employee's salary
+            List<double> wageList = new List<double>();
+            //creat a list to save all salaried employees
+            List<double> salariedList = new List<double>();
             foreach (string line in result)
                 {
                 //split the line 
@@ -35,6 +39,7 @@ namespace ConsoleApp1
                     Salaried obj = new Salaried(id, name, address, phoneNo, sinNo);
                     obj.Salary = double.Parse(data[7]);
                     employeeList.Add(obj);
+                    salariedList.Add(obj.Salary);
                     }
                 //wages
                 else if ('5' <= firstDigit && firstDigit <= '7')
@@ -43,6 +48,7 @@ namespace ConsoleApp1
                     obj.Rate = double.Parse(data[7]);
                     obj.Hour = int.Parse(data[8]);
                     employeeList.Add(obj);
+                    wageList.Add(obj.WeeklySalary());
                     }
                 //part-time employee
                 else if ('8' <= firstDigit && firstDigit <= '9')
@@ -59,12 +65,30 @@ namespace ConsoleApp1
             foreach(Employee obj in employeeList)
                 {
                 totalSalary += obj.WeeklySalary();
+                //Console.WriteLine(obj.WeeklySalary());
                 }
             double average = (double)totalSalary/ employeeNo;
-
-            Console.WriteLine($"{totalSalary}, {average}");
-
-
+            Console.WriteLine($"The weekly total salary is {totalSalary}, and the average is {average}");
+            //c.Calculate and return the highest weekly pay for the wage employees, including the name of the employee.
+            double maxWage = wageList.Max();
+            double minSalaried = salariedList.Min();
+            //find the object with highest and lowest salary
+            string maxName = "";
+            string minName = "";
+            Console.WriteLine(maxWage);
+            foreach (Employee obj in employeeList)
+                {
+                if(maxWage == obj.Salary)
+                    {
+                    maxName = obj.Name;
+                    }
+                if(minSalaried == obj.Salary)
+                    {
+                    minName = obj.Name;
+                    }
+                }
+            Console.WriteLine($"The highest weekly pay is {maxWage} by {maxName}");
+            Console.WriteLine($"The lowest weekly pay is {minSalaried} by {minName}");
 
 
             Console.ReadLine();
