@@ -12,6 +12,6 @@ namespace ConsoleApp1
         public string Phone { get; set; }
         public long SIN { get; set; }
 
-        public abstract double SumSalary();
+        public abstract double WeeklySalary();
         }
     }

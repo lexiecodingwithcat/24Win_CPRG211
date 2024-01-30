@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 namespace ConsoleApp1
     {
    class Program
@@ -13,6 +15,7 @@ namespace ConsoleApp1
             string filePath = @"../../../employees.txt";
             List <string> result = new List<string>();
             result = File.ReadAllLines(filePath).ToList();
+            //a.Fill a list with objects based on the supplied data file.
             //creat a list to add objects
             List<Employee> employeeList = new List<Employee>();
             foreach (string line in result)
@@ -50,10 +53,18 @@ namespace ConsoleApp1
                     employeeList.Add(obj);
                     }
                 }
+            //the number of objects is the length of the list
+            int employeeNo = employeeList.Count;
+            double totalSalary = 0;
             foreach(Employee obj in employeeList)
                 {
-                Console.WriteLine(obj.Name);
+                totalSalary += obj.WeeklySalary();
                 }
+            double average = (double)totalSalary/ employeeNo;
+
+            Console.WriteLine($"{totalSalary}, {average}");
+
+
 
 
             Console.ReadLine();

@@ -15,7 +15,7 @@ namespace ConsoleApp1
             Phone = phone;
             SIN = sin;
             }
-        public override double SumSalary()
+        public override double WeeklySalary()
             {
             return (Rate * Hour);
             }
