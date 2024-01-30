@@ -67,8 +67,8 @@ namespace ConsoleApp1
                 totalSalary += obj.WeeklySalary();
                 //Console.WriteLine(obj.WeeklySalary());
                 }
-            double average = (double)totalSalary/ employeeNo;
-            Console.WriteLine($"The weekly total salary is {totalSalary}, and the average is {average}");
+            double average = Math.Round((double)totalSalary/ employeeNo,2);
+            Console.WriteLine($"The weekly average salary is {average}");
             //c.Calculate and return the highest weekly pay for the wage employees, including the name of the employee.
             double maxWage = wageList.Max();
             double minSalaried = salariedList.Min();
