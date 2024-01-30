@@ -3,12 +3,13 @@
 
 namespace ConsoleApp1
     {
-    internal class Employee
+    abstract class Employee
         {
-        string id;
-        string name;
-        string address;
-
-
+        //common attributes 
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public long SIN { get; set; }
+        public abstract double SumSalary();
         }
     }

@@ -1,0 +1,11 @@
+Please enter the first number(greater than 0):
+-2
+The number you input is less than 0. Please enter a number greater than 0 :
+10
+Please enter the second number:
+5
+Please enter the second number which is greater the first number:
+20
+The difference between 20 and 10 is 10
+The total number in the list is 165
+The prime numbers are: 19 17 13 11
