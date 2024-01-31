@@ -1,0 +1,6 @@
+The weekly average salary is 3016.24
+The highest weekly pay is 2334.5 by Elle Driver
+The lowest weekly pay is 20500 by Samuel Ludlow III
+The percentage of wages employees is: 44.44%
+The percentage of salaried employees is: 33.33%
+The percentage of part-time employees is: 22.22%
