@@ -69,20 +69,27 @@ namespace ModernAppliances
         public override void Find()
         {
             // Write "Enter brand to search for:"
-
+            Console.WriteLine("Enter brand to search for:");
             // Create string variable to hold entered brand
             // Get user input as string and assign to variable.
-
+            string brand= Console.ReadLine();
             // Create list to hold found Appliance objects
-
+            List<Appliance> found_appliances = new List<Appliance>();
             // Iterate through loaded appliances
+            foreach(var appliance in Appliances)
+                {
                 // Test current appliance brand matches what user entered
+                if(appliance.Brand == brand)
+                    { 
                     // Add current appliance in list to found list
-
-
+                    found_appliances.Add(appliance);
+                    }
+                }
             // Display found appliances
             // DisplayAppliancesFromList(found, 0);
-        }
+            DisplayAppliancesFromList(found_appliances, 0);
+
+            }
 
         /// <summary>
         /// Displays Refridgerators
