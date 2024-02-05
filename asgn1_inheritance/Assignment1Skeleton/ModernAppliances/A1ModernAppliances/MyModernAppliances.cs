@@ -2,6 +2,7 @@
 using ModernAppliances.Entities.Abstract;
 using ModernAppliances.Helpers;
 using System.ComponentModel.Design;
+using System.Diagnostics.Metrics;
 
 
 namespace ModernAppliances
@@ -140,67 +141,124 @@ namespace ModernAppliances
         /// <param name="grade">Grade of vacuum to find (or null for any grade)</param>
         /// <param name="voltage">Vacuum voltage (or 0 for any voltage)</param>
         public override void DisplayVacuums()
-        {
+            {
             // Write "Possible options:"
-
             // Write "0 - Any"
             // Write "1 - Residential"
             // Write "2 - Commercial"
-
-            // Write "Enter grade:"
-
-            // Get user input as string and assign to variable
-
-            // Create grade variable to hold grade to find (Any, Residential, or Commercial)
-
-            // Test input is "0"
+            Boolean flag = true;
+            string grade="";
+            while (flag)
+                {
+                Console.WriteLine("Possible options:\n0 - Any\n1 - Residential\n2 - Commercial");
+                // Write "Enter grade:"
+                Console.WriteLine("Enter grade:");
+                // Get user input as string and assign to variable
+                // Create grade variable to hold grade to find (Any, Residential, or Commercial)
+                int input = int.Parse(Console.ReadLine());
+                
+                // Test input is "0"
                 // Assign "Any" to grade
-            // Test input is "1"
+                // Test input is "1"
                 // Assign "Residential" to grade
-            // Test input is "2"
+                // Test input is "2"
                 // Assign "Commercial" to grade
-            // Otherwise (input is something else)
+                // Otherwise (input is something else)
                 // Write "Invalid option."
+                if(input == 0)
+                    {
+                    grade = "Any";
+                   
+                    flag = false;
+                    }else if(input == 1)
+                    {
+                    grade = "Residential";
+                    flag = false;
+                    }
+                else if(input == 2)
+                    {
+                    grade = "Commercial";
+                    flag = false;
+                    }
+                else
+                    {
+                    Console.WriteLine("Invalid option.");
+                    }
 
-                // Return to calling (previous) method
-                // return;
+                }
+            // Return to calling (previous) method
+            // return;
 
             // Write "Possible options:"
-
             // Write "0 - Any"
             // Write "1 - 18 Volt"
             // Write "2 - 24 Volt"
-
-            // Write "Enter voltage:"
-
-            // Get user input as string
-            // Create variable to hold voltage
-
-            // Test input is "0"
+            Boolean flag2 = true;
+            int voltage = 0;
+            while (flag2)
+                {
+                Console.WriteLine("Possible options:\n0 - Any\n1 - 18 Volt\n2 - 24 Volt");
+                // Write "Enter voltage:"
+                Console.WriteLine("Enter voltage:");
+                // Get user input as string
+                string input_voltage = Console.ReadLine();
+                // Create variable to hold voltage
+                
+                // Test input is "0"
                 // Assign 0 to voltage
-            // Test input is "1"
+                // Test input is "1"
                 // Assign 18 to voltage
-            // Test input is "2"
+                // Test input is "2"
                 // Assign 24 to voltage
-            // Otherwise
+                // Otherwise
                 // Write "Invalid option."
                 // Return to calling (previous) method
                 // return;
-
+                if (input_voltage == "0")
+                    {
+                    voltage = 0;
+                    flag2 = false;
+                    }
+                else if (input_voltage == "1")
+                    {
+                    voltage = 18;
+                    flag2 = false;
+                    }
+                else if (input_voltage == "2")
+                    {
+                    voltage = 24;
+                    flag2 = false;
+                    }
+                else
+                    {
+                    Console.WriteLine("invalid option.");
+                    }
+                }
             // Create found variable to hold list of found appliances.
-
+            List<Appliance> found_appliances = new List<Appliance>();
             // Loop through Appliances
-                // Check if current appliance is vacuum
-                    // Down cast current Appliance to Vacuum object
-                    // Vacuum vacuum = (Vacuum)appliance;
-
-                    // Test grade is "Any" or grade is equal to current vacuum grade and voltage is 0 or voltage is equal to current vacuum voltage
-                        // Add current appliance in list to found list
+            // Check if current appliance is vacuum
+            // Down cast current Appliance to Vacuum object
+            // Vacuum vacuum = (Vacuum)appliance;
+            foreach(var appliance in Appliances)
+                {
+                if(appliance is Vacuum)
+                    {
+                    Vacuum vacuum = (Vacuum)appliance;
+                    if((grade == "Any" || grade == vacuum.Grade) &&( voltage ==0 || voltage == vacuum.BatteryVoltage))
+                        {
+                        found_appliances.Add(vacuum);
+                        }
+                    }
+                }
+            // Test grade is "Any" or grade is equal to current vacuum grade and voltage is 0 or voltage is equal to current vacuum voltage
+            // Add current appliance in list to found list
 
             // Display found appliances
             // DisplayAppliancesFromList(found, 0);
-        }
+            DisplayAppliancesFromList(found_appliances, 0);
 
+            }
         /// <summary>
         /// Displays microwaves
         /// </summary>
