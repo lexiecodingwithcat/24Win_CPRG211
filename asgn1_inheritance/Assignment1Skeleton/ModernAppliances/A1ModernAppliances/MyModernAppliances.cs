@@ -265,39 +265,57 @@ namespace ModernAppliances
         public override void DisplayMicrowaves()
         {
             // Write "Possible options:"
-
+            Boolean flag = true;
+            char room_type = ' ';
             // Write "0 - Any"
             // Write "1 - Kitchen"
             // Write "2 - Work site"
-
-            // Write "Enter room type:"
-
-            // Get user input as string and assign to variable
-
-            // Create character variable that holds room type
-
-            // Test input is "0"
+            while (flag)
+                {
+                Console.WriteLine("Possible options:\n0 - Any\n1 - Kitchen\n2 - Work site");
+                // Write "Enter room type:"
+                Console.WriteLine("Room where the microwave will be installed: K (kitchen) or W (work site):");
+                // Get user input as string and assign to variable
+               room_type  = Convert.ToChar(Console.ReadLine().ToUpper());
+                // Create character variable that holds room type
+               if( room_type == 'A' || room_type == 'K'|| room_type == 'W')
+                    {
+                    flag = false;
+                    }
+                // Test input is "0"
                 // Assign 'A' to room type variable
-            // Test input is "1"
+                // Test input is "1"
                 // Assign 'K' to room type variable
-            // Test input is "2"
+                // Test input is "2"
                 // Assign 'W' to room type variable
-            // Otherwise (input is something else)
+                // Otherwise (input is something else)
                 // Write "Invalid option."
                 // Return to calling method
                 // return;
-
+                }
             // Create variable that holds list of 'found' appliances
-
+            List <Appliance> found_apps = new List<Appliance>();
             // Loop through Appliances
+            foreach(var appliance in Appliances)
+                {
                 // Test current appliance is Microwave
+                if ( appliance is Microwave) {
                     // Down cast Appliance to Microwave
-
+                    Microwave microwave = (Microwave)appliance;
                     // Test room type equals 'A' or microwave room type
-                        // Add current appliance in list to found list
+                    // Add current appliance in list to found list
+                    if (room_type == 'A' || room_type == microwave.RoomType)
+                        {
+                        found_apps.Add(microwave);
+                        }
 
+                    }
+
+                }
+                
             // Display found appliances
             // DisplayAppliancesFromList(found, 0);
+            DisplayAppliancesFromList (found_apps, 0);
         }
 
         /// <summary>
