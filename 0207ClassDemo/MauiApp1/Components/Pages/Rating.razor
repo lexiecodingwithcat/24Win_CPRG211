@@ -1,0 +1,25 @@
+﻿@page "/Rating"
+<h1>Star Rating</h1>
+<div>
+    @for(var i = 1; i<=5;i++){
+        var ratingValue = i;
+        <span class="star @GetstarRating(i)"  @onclick="()=>SetRating(ratingValue)">@ratingValue</span>
+    }
+</div>
+
+<div>
+    Your Rating is : @currentRating
+</div>
+
+
+@code {
+    int currentRating = 0;
+    private void SetRating(int rating)
+        {
+        currentRating = rating;
+        }
+    string GetstarRating(int startNo)
+        {
+        return startNo <= currentRating ? "selected" : "";
+        }
+}

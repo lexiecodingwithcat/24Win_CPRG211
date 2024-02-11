@@ -370,7 +370,7 @@ namespace ModernAppliances
         public override void RandomList()
         {
             // Write "Appliance Types"
-            Console.WriteLine("Appliance Types:\n0 - Any\n1 – Refrigerators\n2 – Vacuums\n3 – Microwaves\n4 – Dishwashers");
+            //Console.WriteLine("Appliance Types:\n0 - Any\n1 – Refrigerators\n2 – Vacuums\n3 – Microwaves\n4 – Dishwashers");
             // Write "0 - Any"
             // Write "1 – Refrigerators"
             // Write "2 – Vacuums"
@@ -378,51 +378,63 @@ namespace ModernAppliances
             // Write "4 – Dishwashers"
 
             // Write "Enter type of appliance:"
-            Console.WriteLine("Enter type of appliance:");
+           // Console.WriteLine("Enter type of appliance:");
             // Get user input as string and assign to appliance type variable
-            string app_type = Console.ReadLine();
+            //string app_type = Console.ReadLine();
             // Write "Enter number of appliances: "
             Console.WriteLine("Enter number of appliances: ");
             // Get user input as string and assign to variable
             int app_number = int.Parse(Console.ReadLine());
+            //a list to save random number
+            List <int> random_number = new List<int>();
+            //the length of the Appliance list
+            int list_length = Appliances.Count();
             // Convert user input from string to int
-
+            for(int i = 0; i <= app_number; i++)
+                {
+                int random_no = new Random().Next(0, list_length);
+                random_number.Add(random_no);
+                }
             // Create variable to hold list of found appliances
             List<Appliance> found_appliances = new List<Appliance>();
+
             // Loop through appliances
-            foreach (var appliance in Appliances)
-                {
+          
+               foreach(var number in random_number)
+                    {
+                    found_appliances.Add(Appliances[number]);
+                    }
                 // Test inputted appliance type is "0"
                 // Add current appliance in list to found list
-                if(app_type == "0")
-                    {
-                    found_appliances.Add(appliance);
-                    }else if(app_type == "1")
-                    {
-                        if(appliance is Refrigerator)
-                            {
-                                found_appliances.Add(appliance);
-                            }
-                    }else if(app_type == "2")
-                    {
-                        if(appliance is Vacuum) 
-                            { 
-                                found_appliances.Add(appliance);
-                            }
-                    }else if(app_type == "3")
-                    {
-                    if (appliance is Microwave)
-                        {
-                        found_appliances.Add(appliance);
-                        }
-                    }else if(app_type == "4")
-                    {
-                     if (appliance is Dishwasher)
-                        {
-                        found_appliances.Add(appliance);
-                        }
-                    }
-                }
+                //if(app_type == "0")
+                //    {
+                //    found_appliances.Add(appliance);
+                //    }else if(app_type == "1")
+                //    {
+                //        if(appliance is Refrigerator)
+                //            {
+                //                found_appliances.Add(appliance);
+                //            }
+                //    }else if(app_type == "2")
+                //    {
+                //        if(appliance is Vacuum) 
+                //            { 
+                //                found_appliances.Add(appliance);
+                //            }
+                //    }else if(app_type == "3")
+                //    {
+                //    if (appliance is Microwave)
+                //        {
+                //        found_appliances.Add(appliance);
+                //        }
+                //    }else if(app_type == "4")
+                //    {
+                //     if (appliance is Dishwasher)
+                //        {
+                //        found_appliances.Add(appliance);
+                //        }
+                //    }
+                
 
             // Test inputted appliance type is "1"
             // Test current appliance type is Refrigerator

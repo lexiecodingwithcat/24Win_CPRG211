@@ -1,0 +1,45 @@
+﻿@* to link to other pages *@
+@page "/Todolist"
+@* write html code here *@
+<h1>Todolist</h1>
+ <input type="text" @bind="newTodo"/> @*use newTodo to bind the textbox to make it empty *@
+<button class= "btn-primary"@onclick="AddTodo">AddToDo</button>
+
+@* ordered list *@
+@if(todos.Any()){
+<ol>
+
+    @foreach(var todo in todos)
+        {
+        <li>
+            @todo
+            <button @onclick = "()=>RemoveTodo(todo)">Remove</button>
+        </li>
+        }
+
+    </ol>
+    }
+else
+    {
+    <p>Nothing todo in the list</p>
+    }
+
+@code {
+    //c# code
+    private List<string> todos = new List<string>();
+    private string newTodo;
+    private void AddTodo()
+        {
+        if(!string.IsNullOrWhiteSpace(newTodo))
+            todos.Add(newTodo);
+        //remove the content of the box automatically after clicked the button 
+        newTodo = string.Empty; //clear input box
+
+        }
+        //remove the item
+    private void RemoveTodo(string todo)
+        {
+        todos.Remove(todo);
+        }
+
+}
