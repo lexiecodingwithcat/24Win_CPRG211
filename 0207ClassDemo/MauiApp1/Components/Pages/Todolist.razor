@@ -2,7 +2,7 @@
 @page "/Todolist"
 @* write html code here *@
 <h1>Todolist</h1>
- <input type="text" @bind="newTodo"/> @*use newTodo to bind the textbox to make it empty *@
+ <input type="text" @bind="newTodo" /> @*use newTodo to bind the textbox to make it empty *@
 <button class= "btn-primary"@onclick="AddTodo">AddToDo</button>
 
 @* ordered list *@
@@ -24,6 +24,18 @@ else
     <p>Nothing todo in the list</p>
     }
 
+
+<h2>Country Name</h2>
+<select @bind="newTodo">
+    @foreach (var country in country_list)
+        {
+        <option value="@country" >@country</option>
+        
+        }
+</select>
+
+<p>I have selected: @selectedItem</p>
+
 @code {
     //c# code
     private List<string> todos = new List<string>();
@@ -36,10 +48,17 @@ else
         newTodo = string.Empty; //clear input box
 
         }
-        //remove the item
+    //remove the item
     private void RemoveTodo(string todo)
         {
         todos.Remove(todo);
         }
+
+    List<string> country_list = new List<string> { "Canada", "U.S.","China","Korea", "Japan", "Brazil" };
+    string selectedItem { get; set; }
+    
+
+
+       
 
 }

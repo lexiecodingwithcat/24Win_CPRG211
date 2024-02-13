@@ -1,9 +1,29 @@
 ﻿@page "/Rating"
+
+<style>
+    .selected {
+        background-color: #ff6a00;
+    }
+
+    .star {
+        display: inline-block;
+        text-align: center;
+        margin-right: 10px;
+        color: gray;
+        height: 20px;
+        width: 20px;
+        background-color:grey;
+    }
+
+</style>
+
+
 <h1>Star Rating</h1>
 <div>
     @for(var i = 1; i<=5;i++){
         var ratingValue = i;
-        <span class="star @GetstarRating(i)"  @onclick="()=>SetRating(ratingValue)">@ratingValue</span>
+        <span class="star @GetstarRating(i)" @onclick="()=>SetRating(ratingValue)">@ratingValue &#11088;</span>
+        
     }
 </div>
 

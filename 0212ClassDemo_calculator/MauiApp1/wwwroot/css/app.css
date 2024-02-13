@@ -8,8 +8,8 @@ a, .btn-link {
 
 .btn-primary {
     color: #fff;
-    background-color: #258cfb;
-    border-color: #0026ff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -84,4 +84,3 @@ h1:focus {
         padding-left: env(safe-area-inset-left);
     }
 }
-

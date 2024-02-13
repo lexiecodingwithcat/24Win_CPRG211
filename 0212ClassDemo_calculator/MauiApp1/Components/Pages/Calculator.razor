@@ -1,0 +1,138 @@
+﻿@page "/Calculator"
+@using System.Data
+@using Microsoft.AspNetCore.Components.Web
+
+<h3>Calculator</h3>
+<style>
+    .calculator {
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+    input{
+        width:100%;
+        margin-bottom:20px;
+        height:50px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding:10px;
+    }
+
+    .calculator .display {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 20px;
+            text-align: right;
+            font-size: 24px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 15px;
+        font-size: 18px;
+        border: none;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn.op {
+            background-color: #dcdcdc;
+        }
+
+            .btn.op:hover {
+                background-color: #d0d0d0;
+            }
+
+        .btn.action {
+            background-color: #ffdddd;
+        }
+
+            .btn.action:hover {
+                background-color: #ffcccc;
+            }
+
+        .btn.equals {
+            grid-column: span 2;
+            background-color: #c8e6c9;
+        }
+
+         .btn.equals:hover {
+                background-color: #b2d8b6;
+        }
+</style>
+
+
+<div class="calculator display">
+    <input type="text" @bind = "display" readonly />
+    <div class="buttons">
+        
+        <button class="btn" @onclick="()=>AppendToDisplay('1'.ToString())">1</button>
+        <button class="btn" @onclick="()=>AppendToDisplay('2'.ToString())">2</button>
+        <button class="btn" @onclick="()=>AppendToDisplay('3'.ToString())">3</button>
+        <button class="btn op" @onclick="()=>AppendToDisplay('+'.ToString())">+</button>
+        <button class="btn" @onclick="()=>AppendToDisplay('4'.ToString())">4</button>
+        <button class="btn" @onclick="()=>AppendToDisplay('5'.ToString())">5</button>
+        <button class="btn" @onclick="()=>AppendToDisplay('6'.ToString())">6</button>
+        <button class="btn op" @onclick="()=>AppendToDisplay('-'.ToString())">-</button>
+        <button class="btn" @onclick="()=>AppendToDisplay('7'.ToString())">7</button>
+        <button class="btn" @onclick="()=>AppendToDisplay('8'.ToString())">8</button>
+        <button class="btn" @onclick="()=>AppendToDisplay('9'.ToString())">9</button>
+        <button class="btn op" @onclick="()=>AppendToDisplay('*'.ToString())">*</button>
+        <button class="btn action" @onclick="()=>ClearDisplay()">C</button>
+        <button class="btn" @onclick="()=>AppendToDisplay('0'.ToString())">0</button>
+        <button class="btn equals" @onclick="CalculateResult">=</button>
+        <button class="btn op" @onclick="()=>AppendToDisplay('/'.ToString())">/</button>
+       
+
+    </div>
+</div>
+
+
+@code {
+
+    string display = "0";
+    void AppendToDisplay(string value)
+        {
+        
+        display += value;
+        }
+    void ClearDisplay()
+        {
+        display = "0";
+        }
+    void CalculateResult()
+        {
+        try
+            {
+            display = Evaluate(display).ToString();
+            }
+        catch
+            {
+            display = "Error";
+            }
+
+        }
+    double Evaluate(string ex)
+        {
+        return Convert.ToDouble(new DataTable().Compute(ex,null));
+        }
+
+
+}
