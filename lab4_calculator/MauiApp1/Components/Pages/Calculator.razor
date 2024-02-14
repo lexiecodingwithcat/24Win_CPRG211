@@ -1,4 +1,7 @@
 ﻿@page "/Calculator"
+@using System.Data
+@using Microsoft.AspNetCore.Components.Web
+
 <h3>Calculator</h3>
 <div>
     <input type="text" value="@displayNum"/>
@@ -13,6 +16,12 @@
         <button @onclick="()=>AppendToDisplay('7'.ToString())">7</button>
         <button @onclick="()=>AppendToDisplay('8'.ToString())">8</button>
         <button @onclick="()=>AppendToDisplay('9'.ToString())">9</button>
+        <button @onclick="()=>CancelDisplay()">C</button>
+        <button @onclick="()=>AppendToDisplay('+'.ToString())">+</button>
+        <button @onclick="()=>AppendToDisplay('-'.ToString())">-</button>
+        <button @onclick="()=>AppendToDisplay('*'.ToString())">*</button>
+        <button @onclick="()=>AppendToDisplay('/'.ToString())">/</button>
+        <button @onclick="()=>CalculateNumber()">=</button>
     </div>
   
 
@@ -30,5 +39,17 @@
     void AppendToDisplay(string value)
         {
         displayNum += value;
+        }
+    void CancelDisplay()
+        {
+        displayNum = "0";
+        }
+    double Evaluate(string ex)
+        {
+        return Convert.ToDouble(new DataTable().Compute(ex, null));
+        }
+    void CalculateNumber()
+        {
+        displayNum = Evaluate(displayNum).ToString();
         }
 }
