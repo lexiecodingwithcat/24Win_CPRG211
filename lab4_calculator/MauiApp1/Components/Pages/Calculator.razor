@@ -1,0 +1,34 @@
+﻿@page "/Calculator"
+<h3>Calculator</h3>
+<div>
+    <input type="text" value="@displayNum"/>
+    <div>
+        <button @onclick="()=>AppendToDisplay('0'.ToString())">0</button>
+        <button @onclick="()=>AppendToDisplay('1'.ToString())">1</button>
+        <button @onclick="()=>AppendToDisplay('2'.ToString())">2</button>
+        <button @onclick="()=>AppendToDisplay('3'.ToString())">3</button>
+        <button @onclick="()=>AppendToDisplay('4'.ToString())">4</button>
+        <button @onclick="()=>AppendToDisplay('5'.ToString())">5</button>
+        <button @onclick="()=>AppendToDisplay('6'.ToString())">6</button>
+        <button @onclick="()=>AppendToDisplay('7'.ToString())">7</button>
+        <button @onclick="()=>AppendToDisplay('8'.ToString())">8</button>
+        <button @onclick="()=>AppendToDisplay('9'.ToString())">9</button>
+    </div>
+  
+
+</div>
+
+
+
+
+
+
+
+
+@code {
+    string displayNum = "0";
+    void AppendToDisplay(string value)
+        {
+        displayNum += value;
+        }
+}
