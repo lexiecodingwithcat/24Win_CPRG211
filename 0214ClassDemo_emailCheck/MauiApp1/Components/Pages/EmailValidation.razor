@@ -1,0 +1,53 @@
+﻿@page "/EmailValidation"
+ 
+<h3>EmailValidation</h3>
+<label>Users</label>
+@* drop down menu *@
+<select @onchange="ShowEmail">
+    @* just show messgae but cannot be selected *@
+    <option disabled>Select an Email</option>
+    @foreach(var u in users){
+        <option value="@u.Email">@u.ID----@u.Email</option>
+    }
+   
+</select>
+<p>Selected Email is: @selectedEmail</p>
+<br />
+<br />
+<button @onclick="ValidateEmail" >Validate</button>
+<h1>Message:@message</h1>
+
+
+@code {
+        UserManager um = new UserManager();
+        List<User> users = UserManager.GetUsers();
+        string selectedEmail="";
+        string message = "";
+
+        private void ShowEmail(ChangeEventArgs e){
+            selectedEmail = e.Value.ToString();
+            }
+        private void ValidateEmail(){
+            if(IsValidEmail(selectedEmail)){
+                message = "Valid";
+                }else{
+                message = "Invalid";
+
+                }
+      private bool IsValidEmail(string email)
+                {
+                    return email.Contains('@');
+                }
+    }
+
+
+
+
+
+
+
+
+
+
+
+}
