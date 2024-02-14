@@ -80,7 +80,7 @@
 
 
 <div class="calculator display">
-    <input type="text" @bind = "display" readonly />
+    <input type="text" @bind = "display"  readonly />
     <div class="buttons">
         
         <button class="btn" @onclick="()=>AppendToDisplay('1'.ToString())">1</button>
@@ -99,8 +99,6 @@
         <button class="btn" @onclick="()=>AppendToDisplay('0'.ToString())">0</button>
         <button class="btn equals" @onclick="CalculateResult">=</button>
         <button class="btn op" @onclick="()=>AppendToDisplay('/'.ToString())">/</button>
-       
-
     </div>
 </div>
 
