@@ -1,0 +1,44 @@
+﻿@page "/EmailCheck"
+
+<h3>EmailCheck</h3>
+
+<label>UserEmail</label>
+<select @onchange="GetValue">
+    @* an information that cannot be selected *@
+    <option disabled>Select your email</option>
+    @foreach(var user in users)
+        {
+        <option value="@user.Email">@user.Id---@user.Email</option>
+        }
+</select>
+<p>Selected Email is:@emailSelected</p>
+<button @onclick="checkValid">Validate</button>
+<p>Message:Your Email is @valid_message </p>
+
+@code {
+    userManagement um1 = new userManagement();
+    string emailSelected = "";
+    string valid_message = "";
+    //receive the list from the class by calling its method
+    List<Users> users = userManagement.GetList();
+    void GetValue(ChangeEventArgs e)
+        {
+        emailSelected = e.Value.ToString();
+        }
+    void checkValid()
+        {
+        if (emailSelected.Contains('@'))
+            {
+            valid_message = "valid";
+            }
+        else
+            {
+            valid_message = "invalid";
+            }
+
+        }
+
+
+
+
+}

@@ -26,6 +26,7 @@ namespace MauiApp1
                 string email = parts[1];
                 user = new User(id, email);
                 Users.Add(user); //add user into database
+
                 }
             }
         //Return a list
