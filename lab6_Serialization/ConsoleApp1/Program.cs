@@ -17,7 +17,9 @@ namespace ConsoleApp1
             string file_path = "D:\\SAIT\\c#\\lab6_Serialization\\event.txt";
             SerializeEventObject(event1, file_path);
             DeserializationEventObject(file_path);
-             Console.ReadLine();
+            ReadFromFile(file_path);
+
+            Console.ReadLine();
 
 
             }
@@ -47,8 +49,12 @@ namespace ConsoleApp1
         public static void ReadFromFile(string filePath)
             {
             FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Write);
-
-
+            //create a stream writer object
+            StreamWriter writer = new StreamWriter(fs);
+            writer.WriteLine("Hackthon");
+            //make sure the data in flush is written in the file before close the file
+            writer.Flush();
+            writer.Close();
 
             }
 
