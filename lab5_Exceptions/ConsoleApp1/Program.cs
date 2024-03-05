@@ -9,9 +9,6 @@ namespace ConsoleApp1
     class Circle
         {
         double radius;
-        
-
-
         public void SetRadius(double radius)
             {
             if (radius <= 0)

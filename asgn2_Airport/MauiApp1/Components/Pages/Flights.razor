@@ -1,0 +1,38 @@
+﻿@page "/Flights"
+<style>
+   .flex_container{
+       display:flex;
+       justify-content:space-between;
+   }
+   input{
+       display:block;
+   }
+   h3{
+       text-align:center;
+   }
+</style>
+<section >
+    <h3>Flight Finder</h3>
+    <div class="flex_container">
+        <div>
+            <label>From:</label>
+            <input type="text" name="name" value="" placeholder="any" />
+        </div>
+        <div>
+            <label>To:</label>
+            <input type="text" name="name2" value="" placeholder="any" />
+        </div>
+        <div>
+            <label>Day:</label>
+            <input type="text" name="name3" value="" placeholder="any" />
+        </div>
+
+        <button>Find Flights</button>
+    </div>
+  
+</section>
+
+
+@code {
+
+}
