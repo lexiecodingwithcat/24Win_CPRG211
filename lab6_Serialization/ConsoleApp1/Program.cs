@@ -18,6 +18,8 @@ namespace ConsoleApp1
             string file_path = "D:\\SAIT\\c#\\lab6_Serialization\\event.txt";
             SerializeEventObject(event1, file_path);
             DeserializationEventObject(file_path);
+            Console.WriteLine("Tech Competiton");
+            Console.WriteLine("In Word: Hackathon");
             ReadFromFile(file_path);
 
             Console.ReadLine();
@@ -56,7 +58,7 @@ namespace ConsoleApp1
             //create a stream writer object
             StreamWriter writer = new StreamWriter(fsWrite);
             writer.WriteLine(content);
-            Console.WriteLine("In Word: Hackathon");
+            
             //make sure the data in flush is written in the file before close the file
             writer.Flush();
             writer.Close();
