@@ -1,0 +1,8 @@
+Serialization done
+1
+Calgary
+Tech Competiton
+In Word: Hackathon
+The First Character is: "H"
+The Middel Character is: "a"
+The Last Character is: "n"

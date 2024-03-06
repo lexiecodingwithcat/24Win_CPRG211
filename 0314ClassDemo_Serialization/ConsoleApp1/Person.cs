@@ -14,10 +14,7 @@ namespace ConsoleApp1
         {
         public string Name { get; set; }
         public int Age { get; set; }
-
         [XmlIgnore]
         public string Password { get; set; }
-
-
         }
     }
