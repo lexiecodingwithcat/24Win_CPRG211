@@ -1,38 +1,89 @@
 ﻿@page "/Flights"
+@using MauiApp1.Components.Pages;
 <style>
    .flex_container{
        display:flex;
-       justify-content:space-between;
+       justify-content:space-evenly;
    }
-   input{
+   select{
        display:block;
+       width:150px;
    }
    h3{
        text-align:center;
    }
+   button{
+       border:1px solid black;
+       border-radius:10px;
+       height:30px;
+   }
 </style>
 <section >
     <h3>Flight Finder</h3>
+
     <div class="flex_container">
         <div>
             <label>From:</label>
-            <input type="text" name="name" value="" placeholder="any" />
-        </div>
-        <div>
-            <label>To:</label>
-            <input type="text" name="name2" value="" placeholder="any" />
-        </div>
-        <div>
-            <label>Day:</label>
-            <input type="text" name="name3" value="" placeholder="any" />
+            <select>
+             <option value="Any">Any</option> 
+                @if(airports.Count == 0)
+                    {
+                    <option>Loading</option>
+                    }
+                else
+                    {
+             
+                    foreach(var airport in airports)
+                        {
+                        <option value="@airport">@airport</option>
+                        }
+                    
+                    }
+            </select>
         </div>
 
+        <div>
+            <label>To:</label>
+            <select>
+                <option value="Any">Any</option>
+                @if (airports.Count == 0)
+                    {
+                    <option>Loading</option>
+                    }
+                else
+                    {
+
+                    foreach (var airport in airports)
+                        {
+                        <option value="@airport">@airport</option>
+                        }
+
+                    }
+            </select>
+        </div>
+        
+        <div>
+            <label>Day:</label>
+            <select>
+                <option value="Any">Any</option>
+                @foreach (var day in weekdays)
+                        {
+                        <option value="@day">@day</option>
+                        }
+
+                    }
+            </select>
+        </div>
         <button>Find Flights</button>
+   
     </div>
   
 </section>
 
 
 @code {
+    FlightManager fm = new FlightManager();
+    List<string> airports = FlightManager.airportList;
+    List<string> weekdays = FlightManager.weekdayList;
 
 }

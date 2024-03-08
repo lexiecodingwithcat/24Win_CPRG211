@@ -128,7 +128,7 @@
                 <select class="form-control" @bind="fromValue">
                     <option value="@FlightManager.WEEKDAY_ANY">@FlightManager.WEEKDAY_ANY</option> 
             
-                    @if (airports == null)
+                    @if (airports.Count ==0 )
                     {
                         <option>Loading...</option>
                     }
@@ -136,7 +136,7 @@
                     {
                         @foreach (var a in airports)
                         {
-                            <option value="@a">@a</option>
+                            <option value=@a>@a</option>
                         }
                     }
                 </select>
@@ -189,7 +189,7 @@
 
         <br /><br />
         <select class="form-control" @onchange="@fillForm">
-            @if (flights == null)
+            @if (flights.Count == 0)
             {
                 <option>Loading...</option>
             }

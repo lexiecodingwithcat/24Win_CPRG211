@@ -44,7 +44,7 @@ namespace Assignment2.Components.Pages.Data
         /**
         * The location of the flights text database file.
         */
-        public static string FLIGHTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Resources\Files\flights.csv");
+        public static string FLIGHTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\Resources\Files\flights.csv");
         /**
          * The location of the airports text database file.
          */
@@ -52,7 +52,7 @@ namespace Assignment2.Components.Pages.Data
         // TODO
         // define the airports file path  
         // ...................................
-        public static string AIRPORTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Resources\Files\airports.csv");    // TODO (Update the path)
+        public static string AIRPORTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\Resources\Files\airports.csv");    // TODO (Update the path)
 
         public static List<Flight> flights = new List<Flight>();
         public static List<string> airports = new List<string>();
@@ -185,7 +185,7 @@ namespace Assignment2.Components.Pages.Data
             }
             catch (Exception e)
             {
-
+                
             }
         }
 
@@ -195,23 +195,25 @@ namespace Assignment2.Components.Pages.Data
         private void populateAirports()
         {
             try
-            {
-                int counter = 0;
-                foreach (string line in File.ReadLines(AIRPORTS_TEXT))
                 {
-                    string[] parts = line.Split(",");
+                airports.Clear();
+                string airportFile = @"D:\SAIT\c#\Assignment2_Skeleton\airports.csv";
+                //oepn the file
+                StreamReader sr = new StreamReader(airportFile);
+                string line = sr.ReadLine();
+                while (line != null)
+                    {
+                    string[] part = line.Split(",");
+                    string apCode = part[0];
 
-                    string code = parts[0];
-                    string name = parts[1];
-                    airports.Add(code);
-
-                    counter++;
+                    airports.Add(apCode);
+                    line = sr.ReadLine();
+                    }
                 }
-            }
             catch (Exception e)
-            {
+                {
 
-            }
+                }
         } 
     }
 }
