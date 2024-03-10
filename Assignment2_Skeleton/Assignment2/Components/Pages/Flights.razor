@@ -128,7 +128,7 @@
                 <select class="form-control" @bind="fromValue">
                     <option value="@FlightManager.WEEKDAY_ANY">@FlightManager.WEEKDAY_ANY</option> 
             
-                    @if (airports.Count ==0 )
+                    @if (airports == null )
                     {
                         <option>Loading...</option>
                     }
@@ -179,6 +179,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="columnC myself">
         <div class="row ">
