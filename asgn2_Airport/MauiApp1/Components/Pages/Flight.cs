@@ -8,34 +8,27 @@ namespace MauiApp1.Components.Pages
     {
     internal class Flight
         {
-        string code;
-        string airline;
-        string departure;
-        string destination;
-        string weekDay;
-        string time;
-        int seatNum;
-        double price;
 
-        public string Code { get { return code; } set {  code = value; } }
-        public string Airline { get {  return airline; } set {  airline = value; } }
-        public string Departure { get {  return departure; } set {  departure = value; } }  
-        public string Destination { get;set; }
-        public string Time { get { return time; } set { time = value; } } 
-        public int SeatNum { get {  return seatNum; } set {  seatNum = value; } }
-        public double Price { get { return price; } set { price = value; } }    
+        public string Code { get; set; }
+        public string Airline { get; set; }
+        public string Departure { get; set; }
+        public string Destination { get; set; }
+        public string WeekDay { get; set; }
+        public string Time { get; set; }
+        public int SeatNum { get; set; }
+        public double Price { get; set; }
 
         //constructor 
-        public Flight(string code, string airline, string depatuer, string destination, string weekDay, string time,int seatNum, double price)
+        public Flight(string code, string airline, string departuer, string destination, string weekDay, string time,int seatNum, double price)
             {
-            this.code = code;
-            this.airline = airline;
-            this.departure = depatuer;
-            this.destination = destination;
-            this.weekDay = weekDay;
-            this.time = time;
-            this.seatNum = seatNum;
-            this.price = price;
+            Code = code;
+            Airline = airline;
+            Departure = departuer;
+           Destination = destination;
+            WeekDay = weekDay;
+            Time = time;
+           SeatNum = seatNum;
+            Price = price;
             }
 
 

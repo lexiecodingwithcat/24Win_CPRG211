@@ -196,8 +196,7 @@ namespace Assignment2.Components.Pages.Data
         {
             try
                 {
-                airports.Clear();
-                //string airportFile = @"D:\SAIT\c#\Assignment2_Skeleton\airports.csv";
+                airports.Clear();   
                 //oepn the file
                 StreamReader sr = new StreamReader(AIRPORTS_TEXT);
                 string line = sr.ReadLine();

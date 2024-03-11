@@ -20,18 +20,20 @@ namespace MauiApp1.Components.Pages
         //save airport from the airports.cvs
         public static List<string> airportList = new List<string>();
         public static List<string> weekdayList = new List<string>() { "Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday","Sunday"};
+        //save flights which have been found
+        public static List<Flight> foundFlight = new List<Flight>();
+        
         //constructor: populate data when there is a new object
         public FlightManager() { 
             PopulateAirportFile();
             PopulateFlightFile();
-
             }
 
 
         public static void PopulateAirportFile()
             {
             airportList.Clear();
-            //string airportFile = @"D:\SAIT\c#\Assignment2_Skeleton\airports.csv";
+
             //oepn the file
             StreamReader sr = new StreamReader(airportFile);
             string line=  sr.ReadLine();
@@ -47,7 +49,7 @@ namespace MauiApp1.Components.Pages
 
         public static void PopulateFlightFile()
         {
-             flightList.Clear();
+            flightList.Clear();
             StreamReader sr = new StreamReader(flightFile);
             string line= sr.ReadLine();
             while (line != null)

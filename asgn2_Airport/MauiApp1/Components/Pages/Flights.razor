@@ -35,7 +35,8 @@
     <div class="flex_container">
         <div>
             <label>From:</label>
-            <select @bind = "depature">
+            <select @bind = "departure">
+                <option>Select depature </option>
              <option value="Any">Any</option> 
                 @if(airports.Count == 0)
                     {
@@ -50,12 +51,14 @@
                         }
                     
                     }
+                    
             </select>
         </div>
 
         <div>
             <label>To:</label>
             <select @bind = "destination" >
+                <option>Select destination</option>
                 <option value="Any">Any</option>
                 @if (airports.Count == 0)
                     {
@@ -76,6 +79,7 @@
         <div>
             <label>Day:</label>
             <select @bind="dayOfWeek">
+                <option>Select the day</option>
                 <option value="Any">Any</option>
                 @foreach (var day in weekdays)
                         {
@@ -83,66 +87,168 @@
                         }
                     }
             </select>
+           
         </div>
-        <button @onlick="FindFlight(depature, destination,dayOfWeek)">Find Flights</button>
+        <button @onclick="FindFlight">Find Flights</button>
    
     </div>
   
 </section>
 <section>
    <h3>Flights</h3>
-   <select class="flight">
-        @if(foundFlights.Count == 0){
-            <option>loading</option>
-            <option>@flag</option>
-            
+   <select class="flight" @onchange="FillTheForm">
+        @if(foundFlight.Count == 0)
+            {
+            <option>There is no flight found</option>
             }
         else
             {
-                <option>number</option>
-            foreach (var flight in foundFlights)
+            <option>Please select one flight</option>
+            }
+        @foreach (var flight in foundFlight)
                 {
-                <option>@flight.Code, @flight.Airline</option>
+            <option value="@flight.Code">@flight.Code, @flight.Departure, @flight.Destination,@flight.Airline</option>
                 }
             }
-        
-        
+
     </select>
+   
 </section>
+
 
 <section>
     <h3>Reserve</h3>
     <div>
-        <label>Flight Code:</label>
-        <input/>
+        <label >Flight Code:</label>
+        <input value="@new_code" type="text" /> 
     </div>
-
+    <div>
+        <label>Airline:</label>
+        <input value="@new_airline" type="text" /> 
+    </div>
+    <div>
+        <label>Day:</label>
+        <input value="@new_day" type="text" />
+    </div>
+    <div>
+        <label>Time:</label>
+        <input value="@new_time" type="text" />
+    </div>
+    <div>
+        <label>Cost:</label>
+        <input value="@new_price" type="text" />
+    </div>
+    <div>
+        <label>Name:</label>
+        <input type="text" @onchange="ReceiveName" />
+       
+    </div>
+    <div>
+        <label>Citizenship</label>
+        <input type="text" @onchange="ReceiveCitizenship" />
+    </div>
+    <p>@message</p>
+    <button @onclick="SaveReservation">Reserve</button>
+    <p>Reservation Code:@reservations.Count</p>
 </section>
+
+
 @code {
     FlightManager fm = new FlightManager();
     List<string> airports = FlightManager.airportList;
     List<string> weekdays = FlightManager.weekdayList;
     List<Flight> flights = FlightManager.flightList;
-    List<Flight> foundFlights = new List<Flight>();
+    List<Flight> foundFlight = FlightManager.foundFlight;
+    List<Reservation> reservations = ReserveManager.reserverList;
     //variables to store value of the drop down 
-    string depature ;
+    string departure ;
     string destination ;
     string dayOfWeek ;
-    int flag ;
 
-    public void FindFlight(string from, string to, string time)
-        {
-            flag = 1;
-        foundFlights.Clear();
+    //varibales to store the new value of flight after user choose the flight
+    string new_code;
+    string new_airline;
+    string new_day;
+    string new_time;
+    int new_seat_number;
+    double new_price;
+
+    //varibales to hold the name and citizenship when make reservation 
+    string name;
+    string citizenship;
+
+    //file path storing the reservation file
+    string reserve_file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\..\Resources\Files\reservations.csv");
+
+    //message to check the name or citizenship 
+    string message;
+
+    //receive the ramdom reservation code
+
+
+    public void FindFlight()
+        {    
+        foundFlight.Clear();
         foreach (var f in flights)
             {
-            if (f.Departure == from && f.Destination == to && f.Time == time)
+            if ((f.Departure == departure || departure== "Any")
+            && (f.Destination == destination  || destination =="Any")
+            && (f.WeekDay == dayOfWeek || dayOfWeek == "Any" ))
                 {
-                foundFlights.Add(f);
+                foundFlight.Add(f);
                 }
             }
 
         }
-        
+
+    public void FillTheForm(ChangeEventArgs e)
+        {
+        new_code = e.Value.ToString();
+        foreach(var f in flights)
+            {
+            if(new_code == f.Code)
+                {
+                new_airline = f.Airline;
+                new_day = f.WeekDay;
+                new_time = f.Time;
+                new_seat_number = f.SeatNum;
+                new_price = f.Price;
+
+                }
+            }
+        }
+    //-----------RESERVATION---------------------
+
+    public void ReceiveName(ChangeEventArgs e)
+        {
+        name = e.Value.ToString();
+        }
+
+    public void ReceiveCitizenship(ChangeEventArgs e)
+        {
+        citizenship = e.Value.ToString();
+        }
+
+    public void SaveReservation()
+        {
+        //when clicking the button, generate an object and save this reserve to the list
+        if (name != null && citizenship != null)
+            {
+            Reservation rs = new Reservation(name, citizenship, new_airline);
+            reservations.Add(rs);
+            string line = name + "," + citizenship + "," + new_airline;
+            StreamWriter sw = new StreamWriter(reserve_file);
+            sw.WriteLine(line);
+            sw.Close();
+            }
+        else
+            {
+            message = "Please enter your name and citizenship";
+            }
+
+
+        }
+
+
 
 }
