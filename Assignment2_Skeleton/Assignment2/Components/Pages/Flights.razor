@@ -148,6 +148,7 @@
                     <option value="Any">@FlightManager.WEEKDAY_ANY</option>
                     @if (airports == null)
                     {
+
                         <option>Loading...</option>
                     }
                     else
@@ -199,7 +200,7 @@
                 <option>Select a flight from this list</option>
                 @foreach (var f in flights)
                 {
-                    <option value=@f.Code>@f.Code , @f.Airline, @f.Airline, @f.From, @f.To, @f.Weekday, @f.Time, @f.CostPerSeat</option>
+                    <option value="@f.Code">@f.Code , @f.Airline, @f.Airline, @f.From, @f.To, @f.Weekday, @f.Time, @f.CostPerSeat</option>
                 }
             }
         </select>

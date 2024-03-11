@@ -1,9 +1,12 @@
-﻿@page "/Flights"
-@using MauiApp1.Components.Pages;
+﻿@page "/flights"
+
 <style>
    .flex_container{
        display:flex;
        justify-content:space-evenly;
+   }
+   section{
+       margin-bottom:30px;
    }
    select{
        display:block;
@@ -17,14 +20,22 @@
        border-radius:10px;
        height:30px;
    }
+   .flight{
+       width:100%;
+   }
+   input{
+        width: 100%;
+   }
+
 </style>
+
 <section >
     <h3>Flight Finder</h3>
 
     <div class="flex_container">
         <div>
             <label>From:</label>
-            <select>
+            <select @bind = "depature">
              <option value="Any">Any</option> 
                 @if(airports.Count == 0)
                     {
@@ -44,7 +55,7 @@
 
         <div>
             <label>To:</label>
-            <select>
+            <select @bind = "destination" >
                 <option value="Any">Any</option>
                 @if (airports.Count == 0)
                     {
@@ -64,26 +75,74 @@
         
         <div>
             <label>Day:</label>
-            <select>
+            <select @bind="dayOfWeek">
                 <option value="Any">Any</option>
                 @foreach (var day in weekdays)
                         {
                         <option value="@day">@day</option>
                         }
-
                     }
             </select>
         </div>
-        <button>Find Flights</button>
+        <button @onlick="FindFlight(depature, destination,dayOfWeek)">Find Flights</button>
    
     </div>
   
 </section>
+<section>
+   <h3>Flights</h3>
+   <select class="flight">
+        @if(foundFlights.Count == 0){
+            <option>loading</option>
+            <option>@flag</option>
+            
+            }
+        else
+            {
+                <option>number</option>
+            foreach (var flight in foundFlights)
+                {
+                <option>@flight.Code, @flight.Airline</option>
+                }
+            }
+        
+        
+    </select>
+</section>
 
+<section>
+    <h3>Reserve</h3>
+    <div>
+        <label>Flight Code:</label>
+        <input/>
+    </div>
 
+</section>
 @code {
     FlightManager fm = new FlightManager();
     List<string> airports = FlightManager.airportList;
     List<string> weekdays = FlightManager.weekdayList;
+    List<Flight> flights = FlightManager.flightList;
+    List<Flight> foundFlights = new List<Flight>();
+    //variables to store value of the drop down 
+    string depature ;
+    string destination ;
+    string dayOfWeek ;
+    int flag ;
+
+    public void FindFlight(string from, string to, string time)
+        {
+            flag = 1;
+        foundFlights.Clear();
+        foreach (var f in flights)
+            {
+            if (f.Departure == from && f.Destination == to && f.Time == time)
+                {
+                foundFlights.Add(f);
+                }
+            }
+
+        }
+        
 
 }
