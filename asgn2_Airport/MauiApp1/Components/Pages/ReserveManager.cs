@@ -15,8 +15,11 @@ namespace MauiApp1.Components.Pages
         public static string GenerateRandomNumber()
             {
             string code;
-            Random random = new Random();   
-            code = random.Next(1000,10000).ToString(); 
+            Random random = new Random();
+            char randomLetter1 = Convert.ToChar(random.Next('A', 'Z'));
+            char randomLetter2 = Convert.ToChar(random.Next('A', 'Z'));
+            string randomNumber = random.Next(1000,10000).ToString();
+            code = string.Concat(randomLetter1,randomLetter2)+randomNumber ;
             return code;
             }
 

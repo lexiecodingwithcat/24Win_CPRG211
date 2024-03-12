@@ -8,7 +8,7 @@ namespace MauiApp1.Components.Pages
     {
     internal class Reservation
         {
-        //string ReserveCode { get; set; }
+        ////string ReserveCode { get; set; }
         string ReserveName { get; set; }    
         string ReserveCitizenship { get; set; }
         string ReserveAirline { get; set; }

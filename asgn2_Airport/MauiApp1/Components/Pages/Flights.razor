@@ -149,7 +149,7 @@
     </div>
     <p>@message</p>
     <button @onclick="SaveReservation">Reserve</button>
-    <p>Reservation Code:@reservations.Count</p>
+    <p>Reservation Code:@reserve_code</p>
 </section>
 
 
@@ -183,7 +183,8 @@
     //message to check the name or citizenship 
     string message;
 
-    //receive the ramdom reservation code
+    //varible to store the reservation code
+    string reserve_code;
 
 
     public void FindFlight()
@@ -240,12 +241,15 @@
             StreamWriter sw = new StreamWriter(reserve_file);
             sw.WriteLine(line);
             sw.Close();
+            //receive the ramdom reservation code
+             reserve_code = ReserveManager.GenerateRandomNumber();
             }
         else
             {
             message = "Please enter your name and citizenship";
             }
 
+       
 
         }
 
