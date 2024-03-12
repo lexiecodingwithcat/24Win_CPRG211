@@ -1,4 +1,5 @@
 ﻿@page "/flights"
+@using MauiApp1.Components.Pages;
 
 <style>
    .flex_container{
@@ -152,14 +153,52 @@
     <p>Reservation Code:@reserve_code</p>
 </section>
 
+<section>
+    <h3>Search</h3>
+    <div>
+        <label>Code:</label>
+        <input type="text" name="reservedCode" value="" />
+    </div>
+    <div>
+        <label>Airline:</label>
+        <input type="text" name="reservedAirline" value="" />
+    </div>
+    <div>
+        <label>Name:</label>
+        <input type="text" name="reservedName" value="" />
+    </div>
+    <button>Find Reservations</button>
+</section>
+
+<section>
+    <select>
+        @if (reservedFlight.Count == 0)
+            {
+            <option>There is no reservation</option>
+            }
+        else
+            {
+            foreach (var r in reservedFlight)
+                {
+                <option>@r.ReserveCode</option>
+                }
+            }
+
+
+</select>   
+</section>
 
 @code {
     FlightManager fm = new FlightManager();
+     // ReserveManager rm1 = new ReserveManager();
     List<string> airports = FlightManager.airportList;
     List<string> weekdays = FlightManager.weekdayList;
     List<Flight> flights = FlightManager.flightList;
     List<Flight> foundFlight = FlightManager.foundFlight;
-    List<Reservation> reservations = ReserveManager.reserverList;
+    List<Reservation> reservedFlight = ReserveManager.reserveList;
+
+
+
     //variables to store value of the drop down 
     string departure ;
     string destination ;
@@ -178,13 +217,12 @@
     string citizenship;
 
     //file path storing the reservation file
-    string reserve_file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\..\Resources\Files\reservations.csv");
-
+    string reserve_file = ReserveManager.reserve_file;
     //message to check the name or citizenship 
     string message;
 
     //varible to store the reservation code
-    string reserve_code;
+    string reserve_code = " ";
 
 
     public void FindFlight()
@@ -235,24 +273,22 @@
         //when clicking the button, generate an object and save this reserve to the list
         if (name != null && citizenship != null)
             {
-            Reservation rs = new Reservation(name, citizenship, new_airline);
-            reservations.Add(rs);
-            string line = name + "," + citizenship + "," + new_airline;
-            StreamWriter sw = new StreamWriter(reserve_file);
+            //receive the ramdom reservation code
+            reserve_code = ReserveManager.GenerateRandomNumber();
+            // Reservation rs = new Reservation(reserve_code, name, citizenship, new_airline);
+            // reservations.Add(rs);
+            string line = reserve_code + ","+ name + "," + citizenship + "," + new_airline;
+            StreamWriter sw = new StreamWriter(reserve_file,true);
             sw.WriteLine(line);
             sw.Close();
-            //receive the ramdom reservation code
-             reserve_code = ReserveManager.GenerateRandomNumber();
             }
         else
             {
             message = "Please enter your name and citizenship";
             }
-
-       
-
         }
 
+     
 
 
 }
