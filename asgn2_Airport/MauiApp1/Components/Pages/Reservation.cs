@@ -6,17 +6,25 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Components.Pages
     {
-    internal class Reservation
+     public class Reservation
         {
-        public string ReserveCode { get; set; }
-        public string ReserveName { get; set; }    
+       public string ReserveCode { get; set; }
+        public string ReserveName { get; set; }
         public string ReserveCitizenship { get; set; }
         public string ReserveAirline { get; set; }
-        public Reservation(string code,string name, string citizenship, string airline) {
+        public string ReserveDeparture { get; set; }
+        public string ReserveDestination { get; set; }
+        public string ReserveTime { get; set; }
+        public string ReserveDay { get; set; }
+        public Reservation(string code,string name, string citizenship, string reserveDeparture, string reserveDestination,string airline, string reserveDay, string reserveTime) {
             ReserveCode = code;
             ReserveName = name;
             ReserveCitizenship = citizenship;
+            ReserveDeparture = reserveDeparture;
+            ReserveDestination = reserveDestination;
             ReserveAirline = airline;
+            ReserveDay = reserveDay;
+            ReserveTime = reserveTime;
             }
 
 

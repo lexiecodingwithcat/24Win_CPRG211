@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicMathTest", "UnitTestProject4\BasicMathTest.csproj", "{F1DA130F-DAD3-4AA1-938C-BBB935EA8C70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "ConsoleApp1\UnitTest.csproj", "{0A109C18-DBF8-47B2-BDCD-E6B43E634C19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1DA130F-DAD3-4AA1-938C-BBB935EA8C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1DA130F-DAD3-4AA1-938C-BBB935EA8C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1DA130F-DAD3-4AA1-938C-BBB935EA8C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1DA130F-DAD3-4AA1-938C-BBB935EA8C70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A109C18-DBF8-47B2-BDCD-E6B43E634C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A109C18-DBF8-47B2-BDCD-E6B43E634C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A109C18-DBF8-47B2-BDCD-E6B43E634C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A109C18-DBF8-47B2-BDCD-E6B43E634C19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB12867F-1876-4A46-8A4D-CA0F8F5DE6A1}
+	EndGlobalSection
+EndGlobal

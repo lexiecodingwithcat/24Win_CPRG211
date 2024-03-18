@@ -33,7 +33,6 @@ namespace MauiApp1.Components.Pages
         public static void PopulateAirportFile()
             {
             airportList.Clear();
-
             //oepn the file
             StreamReader sr = new StreamReader(airportFile);
             string line=  sr.ReadLine();
@@ -45,6 +44,7 @@ namespace MauiApp1.Components.Pages
               airportList.Add(apCode);
              line = sr.ReadLine();
              }
+            sr.Close();
             }
 
         public static void PopulateFlightFile()
@@ -67,6 +67,7 @@ namespace MauiApp1.Components.Pages
                 flightList.Add(flight);
                 line = sr.ReadLine();
                 }
+            sr.Close();
             }
 
 

@@ -1,5 +1,5 @@
 ﻿@page "/flights"
-@using MauiApp1.Components.Pages;
+@using MauiApp1.Components.Pages
 
 <style>
    .flex_container{
@@ -26,6 +26,9 @@
    }
    input{
         width: 100%;
+   }
+   .full{
+       width:100%;
    }
 
 </style>
@@ -115,8 +118,6 @@
     </select>
    
 </section>
-
-
 <section>
     <h3>Reserve</h3>
     <div>
@@ -157,54 +158,58 @@
     <h3>Search</h3>
     <div>
         <label>Code:</label>
-        <input type="text" name="reservedCode" value="" />
+        <input type="text" name="reservedCode" value="" @onchange="ReceiveInputCode" />
     </div>
     <div>
         <label>Airline:</label>
-        <input type="text" name="reservedAirline" value="" />
+        <input type="text" name="reservedAirline" value="" @onchange="ReceiveInputAirline" />
     </div>
     <div>
         <label>Name:</label>
-        <input type="text" name="reservedName" value="" />
+        <input type="text" name="reservedName" value="" @onchange="ReceiveInputName" />
+        <p>@input_name</p>
     </div>
-    <button>Find Reservations</button>
+    <button  @onclick="FindReservation" >Find Reservations</button>
 </section>
 
 <section>
-    <select>
-        @if (reservedFlight.Count == 0)
+    <select class="full">
+        @if(reservations.Count == 0)
             {
             <option>There is no reservation</option>
             }
         else
             {
-            foreach (var r in reservedFlight)
+            foreach(var r in foundReservation)
                 {
-                <option>@r.ReserveCode</option>
+                <option>@r.ReserveCode,@r.ReserveName,@r.ReserveDeparture,@r.ReserveDestination,@r.ReserveAirline,@r.ReserveDay,@r.ReserveTime</option>
                 }
             }
+       
+    </select> 
 
-
-</select>   
 </section>
 
 @code {
     FlightManager fm = new FlightManager();
-     // ReserveManager rm1 = new ReserveManager();
     List<string> airports = FlightManager.airportList;
     List<string> weekdays = FlightManager.weekdayList;
     List<Flight> flights = FlightManager.flightList;
     List<Flight> foundFlight = FlightManager.foundFlight;
-    List<Reservation> reservedFlight = ReserveManager.reserveList;
-
-
+    //create a list to save the reservation has been found
+    ReserveManager rm = new ReserveManager();
+    List<Reservation> reservations = ReserveManager.reserveList;
+    List<Reservation> foundReservation = new List<Reservation>();
+    // List<Reservation> reservedFlight = ReserveManager.LoadReservations();
 
     //variables to store value of the drop down 
     string departure ;
     string destination ;
     string dayOfWeek ;
 
-    //varibales to store the new value of flight after user choose the flight
+    //varibales to store the information of flight after user choose the flight
+    string new_from;
+    string new_to;
     string new_code;
     string new_airline;
     string new_day;
@@ -223,6 +228,11 @@
 
     //varible to store the reservation code
     string reserve_code = " ";
+
+    //store value of the input for searching reservation 
+    string input_name;
+    string input_code;
+    string input_airline;
 
 
     public void FindFlight()
@@ -247,16 +257,17 @@
             {
             if(new_code == f.Code)
                 {
+                new_from = f.Departure;
+                new_to = f.Destination;
                 new_airline = f.Airline;
                 new_day = f.WeekDay;
                 new_time = f.Time;
                 new_seat_number = f.SeatNum;
                 new_price = f.Price;
-
                 }
             }
         }
-    //-----------RESERVATION---------------------
+    //-----------MAKE RESERVATION---------------------
 
     public void ReceiveName(ChangeEventArgs e)
         {
@@ -275,12 +286,13 @@
             {
             //receive the ramdom reservation code
             reserve_code = ReserveManager.GenerateRandomNumber();
-            // Reservation rs = new Reservation(reserve_code, name, citizenship, new_airline);
-            // reservations.Add(rs);
-            string line = reserve_code + ","+ name + "," + citizenship + "," + new_airline;
+            Reservation rs = new Reservation(reserve_code, name, citizenship,new_from,new_to, new_airline,new_day,new_time);
+            reservations.Add(rs);
+            string line = reserve_code + "," + name + "," + citizenship + "," + new_from + "," + new_to + "," + new_airline + "," + new_day + "," + new_time;
             StreamWriter sw = new StreamWriter(reserve_file,true);
             sw.WriteLine(line);
             sw.Close();
+           
             }
         else
             {
@@ -288,7 +300,34 @@
             }
         }
 
-     
+    //=================SEARCH RESERVATION====================
+    public void ReceiveInputName(ChangeEventArgs e)
+        {
+        input_name = e.Value.ToString();
+        }
+
+    public void ReceiveInputCode(ChangeEventArgs e)
+        {
+        input_code = e.Value.ToString();
+        }
+    public void ReceiveInputAirline(ChangeEventArgs e)
+        {
+        input_airline = e.Value.ToString();
+        }
+
+
+    public void FindReservation()
+        {
+        // ReserveManager.PopulateReservation();
+    
+        foreach (var r in reservations)
+            {
+            if (input_code == r.ReserveCode || input_name == r.ReserveName || input_airline == r.ReserveAirline)
+                {
+                 foundReservation.Add(r);
+                }
+             }
+         }
 
 
 }
