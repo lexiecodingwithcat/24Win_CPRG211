@@ -1,0 +1,10 @@
+Addition
+Enter number n:
+10
+Enter number m:
+20
+165
+Division
+Enter your number:
+1100
+2
