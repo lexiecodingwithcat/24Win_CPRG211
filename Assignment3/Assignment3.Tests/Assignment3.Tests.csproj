@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Assignment3\Assignment3.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Assignment3">
+      <HintPath>..\Assignment3\bin\Debug\Assignment3.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,126 @@
+﻿@page "/counter"
+
+<style>
+    section{
+        display:flex;
+        flex-direction: column;
+        gap:10px;
+        justify-content:center;
+        align-items:center;
+    }
+    button{
+        margin-top:30px;
+        margin-right:20px;
+    border-radius:5px;
+    border: 1px solid lightblue;
+    }
+
+</style>
+
+<section>
+    <h1>Registration form</h1>
+    <div>
+        <label>First Name:</label>
+        <input type="type" name="name" value="@first_name" @onchange="GetFirstName"/>
+    </div>
+    <div>
+        <label>Last Name:</label>
+        <input type="type" name="name" value="@last_name" @onchange="GetLastName" />
+       
+    </div>
+    <div>
+        <label>email:</label>
+        <input type="type" name="name" value="@email" @onchange="GetEmail" />
+    
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="type" name="name" value="@password" @onchange="GetPassword" />
+    </div>
+</section>
+<p>@messageforInsert</p>
+<p>@messageForCreat</p>
+<p>@messageToDelete</p>
+<p>@exists</p>
+<button @onclick="ClearForm">Clear</button>
+<button @onclick="RegisterMember">Register</button> 
+
+
+
+
+
+
+@code {
+    //create table
+
+
+    string first_name;
+    string last_name;
+    string email;
+    string password;
+    //save messgaes
+    string messageforInsert;
+    string messageForCreat;
+
+    string messageToDelete;
+    bool exists;
+    //save booleans for checking name, email, and password
+    // bool correct_name = false;
+
+    //get values from the input box
+    void GetFirstName(ChangeEventArgs e)
+        {
+        first_name = e.Value.ToString();
+        }
+    void GetLastName(ChangeEventArgs e)
+        {
+        last_name = e.Value.ToString();
+        }
+    void GetEmail(ChangeEventArgs e)
+        {
+        email = e.Value.ToString();
+        }
+    void GetPassword(ChangeEventArgs e)
+        {
+        password = e.Value.ToString();
+        }
+
+    //check validation of all input
+    // bool CheckNames()
+    //     {
+    //     if(first_name== null || last_name == null)
+    //         {
+    //         message_name = "First and last name cannot be empty";
+    //         }
+    //     else
+    //         {
+    //         correct_name = true;
+    //         }
+    //     return correct_name;
+    //     }
+
+
+
+
+    //clear all information
+    void ClearForm()
+        {
+        first_name = null;
+        last_name = null;
+        email = null;
+        password = null;
+        }
+
+    void RegisterMember()
+        {
+        messageForCreat = DBhandler.CreateTableDB();
+        exists = DBhandler.IsTableExist();
+        //messageToDelete = DBhandler.DeleteTable();
+     
+       // messageforInsert = DBhandler.InsertMemberToDB(first_name,last_name, email,password);
+
+     
+      }
+}
+
+
