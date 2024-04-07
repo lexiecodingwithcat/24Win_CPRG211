@@ -1,4 +1,4 @@
-﻿@page "/counter"
+﻿@page "/Register"
 
 <style>
     section{
@@ -21,24 +21,24 @@
     <h1>Registration form</h1>
     <div>
         <label>First Name:</label>
-        <input type="type" name="name" value="@first_name" @onchange="GetFirstName"/>
+        <input type="text" name="firstname" value="@first_name" @onchange="GetFirstName"/>
     </div>
     <div>
         <label>Last Name:</label>
-        <input type="type" name="name" value="@last_name" @onchange="GetLastName" />
+        <input type="text" name="lastname" value="@last_name" @onchange="GetLastName" />
        
     </div>
     <div>
         <label>email:</label>
-        <input type="type" name="name" value="@email" @onchange="GetEmail" />
+        <input type="email" name="email" value="@email" @onchange="GetEmail" />
     
     </div>
     <div>
         <label>Password:</label>
-        <input type="type" name="name" value="@password" @onchange="GetPassword" />
+        <input type="password" name="password" value="@password" @onchange="GetPassword" />
     </div>
 </section>
-<p>@messageAdd</p>
+<p>@message</p>
 <button @onclick="ClearForm">Clear</button>
 <button @onclick="RegisterMember">Register</button> 
 
@@ -54,8 +54,7 @@
     string password;
 
     //save messgaes
-    string message_name;
-    string messageAdd;
+    string message;
 
 
     //save booleans for checking name, email, and password
@@ -79,23 +78,6 @@
         password = e.Value.ToString();
         }
 
-    //check validation of all input
-    bool CheckNames()
-        {
-        if(first_name== null || last_name == null)
-            {
-            message_name = "First and last name cannot be empty";
-            return false;
-            }
-        else
-            {
-            return true;
-            }
-
-        }
-
-
-
 
     //clear all information
     void ClearForm()
@@ -104,20 +86,15 @@
         last_name = null;
         email = null;
         password = null;
-        messageAdd = null;
+        message= null;
         }
 
     void RegisterMember()
         {
-        if (CheckNames())
-            {
-            DBhandler db = new DBhandler();
-            //add databa to DB
-            messageAdd = db.InsertMemberToDB(first_name, last_name, email, password);
-
-            }
-
-      }
+        //ask manager to check the value
+       message =  MemberManager.AddMemeber(first_name, last_name, email, password);
+        }
+       
 }
 
 

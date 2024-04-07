@@ -67,6 +67,8 @@ namespace MauiApp1.Components.Pages
                 SQLiteCommand cmd = new SQLiteCommand(sql, connection);
                 using (cmd)
                     {
+                  // need for insert, delete and update
+                  //query doesn't change the data value of a table
                     cmd.ExecuteNonQuery();
                     }
                 connection.Close();
@@ -78,16 +80,9 @@ namespace MauiApp1.Components.Pages
             
             }
 
-
-
-
-
-
-
-       public string InsertMemberToDB(string fname, string lname, string email, string password)
+       public void InsertMemberToDB(string fname, string lname, string email, string password)
             {
-            try
-                {
+            
                 SQLiteConnection connection = new SQLiteConnection(connect_string);
                 connection.Open();
                 string sql = $"INSERT INTO member(first_name, last_name, email, password) VALUES (@fname,@lname,@email,@password)";
@@ -101,13 +96,39 @@ namespace MauiApp1.Components.Pages
                     cmd.ExecuteNonQuery();
                     }
                 connection.Close();
-                return "Registered successfully";
-                }catch(Exception ex)
-                {
-                return ex.Message;
-                }
-                
              }
+
+        //load all the data from the database to Manager
+        public List<Member> LoadMemberFromDB(List<Member> member_list)
+            {
+            //create connection 
+            SQLiteConnection connection = new SQLiteConnection(connect_string);
+            connection.Open();
+            string sql = "SELECT * FROM member";
+            SQLiteCommand cmd = new SQLiteCommand(sql, connection);
+            using (cmd)
+                {
+                using( SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                    while (reader.Read())
+                        {
+                        string firstname = reader.GetString(0);
+                        string lastname = reader.GetString(1);
+                        string email = reader.GetString(2);
+                        string password = reader.GetString(3);
+                        Member member = new Member(firstname, lastname, email, password);
+                        member_list.Add(member);
+
+                        }
+                    }
+ 
+                }
+            connection.Close();
+            return member_list;
+            }
+
+
+
        }
 
         
