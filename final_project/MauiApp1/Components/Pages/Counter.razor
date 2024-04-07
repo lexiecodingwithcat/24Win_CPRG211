@@ -38,10 +38,7 @@
         <input type="type" name="name" value="@password" @onchange="GetPassword" />
     </div>
 </section>
-<p>@messageforInsert</p>
-<p>@messageForCreat</p>
-<p>@messageToDelete</p>
-<p>@exists</p>
+<p>@messageAdd</p>
 <button @onclick="ClearForm">Clear</button>
 <button @onclick="RegisterMember">Register</button> 
 
@@ -51,19 +48,16 @@
 
 
 @code {
-    //create table
-
-
     string first_name;
     string last_name;
     string email;
     string password;
-    //save messgaes
-    string messageforInsert;
-    string messageForCreat;
 
-    string messageToDelete;
-    bool exists;
+    //save messgaes
+    string message_name;
+    string messageAdd;
+
+
     //save booleans for checking name, email, and password
     // bool correct_name = false;
 
@@ -86,18 +80,19 @@
         }
 
     //check validation of all input
-    // bool CheckNames()
-    //     {
-    //     if(first_name== null || last_name == null)
-    //         {
-    //         message_name = "First and last name cannot be empty";
-    //         }
-    //     else
-    //         {
-    //         correct_name = true;
-    //         }
-    //     return correct_name;
-    //     }
+    bool CheckNames()
+        {
+        if(first_name== null || last_name == null)
+            {
+            message_name = "First and last name cannot be empty";
+            return false;
+            }
+        else
+            {
+            return true;
+            }
+
+        }
 
 
 
@@ -109,17 +104,19 @@
         last_name = null;
         email = null;
         password = null;
+        messageAdd = null;
         }
 
     void RegisterMember()
         {
-        messageForCreat = DBhandler.CreateTableDB();
-        exists = DBhandler.IsTableExist();
-        //messageToDelete = DBhandler.DeleteTable();
-     
-       // messageforInsert = DBhandler.InsertMemberToDB(first_name,last_name, email,password);
+        if (CheckNames())
+            {
+            DBhandler db = new DBhandler();
+            //add databa to DB
+            messageAdd = db.InsertMemberToDB(first_name, last_name, email, password);
 
-     
+            }
+
       }
 }
 

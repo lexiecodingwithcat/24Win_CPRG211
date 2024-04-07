@@ -13,16 +13,14 @@ namespace MauiApp1.Components.Pages
         {
         static string connect_string = "Data Source=D:\\SAIT\\c#\\final_project\\member.db";
 
-        //public DBhandler()
-        //    {
-        //CreateTableDB(connect_string);
-        //    }
+        public DBhandler()
+           {
+        CreateTableDB();
+           }
 
         //check whether the table exists or not
-        public static bool IsTableExist()
+        protected bool IsTableExist()
             {
-            try
-                {
                 using (SQLiteConnection connection = new SQLiteConnection(connect_string))
                     {
                     connection.Open();
@@ -36,24 +34,15 @@ namespace MauiApp1.Components.Pages
                             }
                         }
                     }
-                }
-            catch (Exception ex)
-                {
-                
-                return false;
-                }
             }
 
-
-
-
-
-
-        public static string CreateTableDB()
+        private void CreateTableDB()
             {
-            try
-                {//create connection 
-                
+            //if table does not exists
+            if (!IsTableExist())
+                {
+                //create connection 
+
                 SQLiteConnection connection = new SQLiteConnection(connect_string);
                 connection.Open();
                 string sql = "CREATE TABLE member (first_name TEXT(30), last_name TEXT(30), email TEXT(50) PRIMARY KEY, password TEXT(30) );";
@@ -65,13 +54,8 @@ namespace MauiApp1.Components.Pages
                     }
 
                 connection.Close();
-                return "created";
-                }catch (Exception ex)
-                {
-                return ex.Message;
                 }
-            
-            
+
             }
 
         public static string DeleteTable()
@@ -100,9 +84,10 @@ namespace MauiApp1.Components.Pages
 
 
 
-       public static string InsertMemberToDB(string fname, string lname, string email, string password)
+       public string InsertMemberToDB(string fname, string lname, string email, string password)
             {
-            try {
+            try
+                {
                 SQLiteConnection connection = new SQLiteConnection(connect_string);
                 connection.Open();
                 string sql = $"INSERT INTO member(first_name, last_name, email, password) VALUES (@fname,@lname,@email,@password)";
@@ -114,24 +99,16 @@ namespace MauiApp1.Components.Pages
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.ExecuteNonQuery();
-               
                     }
                 connection.Close();
-                return "success";
-                }
-            catch (Exception ex)
+                return "Registered successfully";
+                }catch(Exception ex)
                 {
                 return ex.Message;
                 }
-            
-            
-            }
+                
+             }
+       }
 
-
-
-       
-
-
-
-        }
+        
     }
