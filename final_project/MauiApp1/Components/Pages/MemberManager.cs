@@ -9,8 +9,12 @@ namespace MauiApp1.Components.Pages
     {
     internal class MemberManager
         {
-        List<Member> members;
+       public static List<Member> members;
 
+        MemberManager()
+            {
+
+            }
 
         //check the name of member
         private static bool CheckName(string first_name, string last_name) {
@@ -87,6 +91,14 @@ namespace MauiApp1.Components.Pages
                 }
             }
 
-      
+        //receive result from DB
+        public static List<Member> RetriveMember()
+            {
+            DBhandler db = new DBhandler();
+            members = db.LoadMemberFromDB();
+            return members;
+            }
+
+
         }
     }

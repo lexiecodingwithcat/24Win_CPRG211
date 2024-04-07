@@ -11,6 +11,9 @@ namespace MauiApp1.Components.Pages
     {
     public class DBhandler
         {
+
+         static List<Member> member_list = new List<Member>();
+
         static string connect_string = "Data Source=D:\\SAIT\\c#\\final_project\\member.db";
 
         public DBhandler()
@@ -99,7 +102,7 @@ namespace MauiApp1.Components.Pages
              }
 
         //load all the data from the database to Manager
-        public List<Member> LoadMemberFromDB(List<Member> member_list)
+        public List<Member> LoadMemberFromDB()
             {
             //create connection 
             SQLiteConnection connection = new SQLiteConnection(connect_string);

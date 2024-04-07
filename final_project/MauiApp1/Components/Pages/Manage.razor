@@ -10,17 +10,34 @@
 </style>
 
 <section>
-    <div>
-        <p>First name</p>
-        <p>Last name</p>
-        <p>Email</p>
-    </div>
+   <table>
+        <tr><td>First Name</td> <td>Last Name</td> <td>Email</td></tr>
+        @foreach(var m in members)
+            {
+            <tr>
+                <td>@m.FirstName</td>
+                <td>@m.LastName</td>
+                <td>@m.EmailAddress</td>
+                <button>Edit</button>
+                <button>Delete</button>
+            </tr>
+            }
 
-    <button>Edit</button>
-    <button>Delete</button>
+
+
+   </table>
+
+    
 </section>
 
+
+
+
+
 @code {
+    List<Member> members = MemberManager.RetriveMember();
+
+
 
 }
 
