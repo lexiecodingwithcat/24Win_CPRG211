@@ -99,6 +99,21 @@ namespace MauiApp1.Components.Pages
             return members;
             }
 
+        //check the validation of update information 
+        public static string EditMember(string lname, string fname, string email)
+            {
+            string message = DBhandler.UpdateMemberToDB(lname, fname, email);
+            RetriveMember();
+            return message;
+            }
+
+        public static string DeleteMember(string email)
+            {
+            DBhandler db = new DBhandler();
+            string message = db.DeleteMemberDB(email);
+            RetriveMember() ;
+            return message;
+            }
 
         }
     }

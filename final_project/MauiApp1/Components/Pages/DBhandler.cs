@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using Microsoft.Maui.Controls;
 
 
 namespace MauiApp1.Components.Pages
@@ -104,6 +105,8 @@ namespace MauiApp1.Components.Pages
         //load all the data from the database to Manager
         public List<Member> LoadMemberFromDB()
             {
+            //clear list, otherwise the data will repeate
+            member_list.Clear();
             //create connection 
             SQLiteConnection connection = new SQLiteConnection(connect_string);
             connection.Open();
@@ -129,6 +132,54 @@ namespace MauiApp1.Components.Pages
             connection.Close();
             return member_list;
             }
+
+
+        //updata members in the DB
+        public static string UpdateMemberToDB(string new_fname, string new_lname, string email)
+            {
+            try {
+                SQLiteConnection connection = new SQLiteConnection(connect_string);
+                connection.Open();
+                string sql = "UPDATE member SET first_name = @new_fname, last_name=@new_lname WHERE email = @email";
+                SQLiteCommand cmd = new SQLiteCommand(sql, connection);
+                using (cmd)
+                    {
+                    cmd.Parameters.AddWithValue("@new_fname", new_fname);
+                    cmd.Parameters.AddWithValue("@new_lname", new_lname);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.ExecuteNonQuery();
+                    }
+                connection.Close();
+               
+                return "updated successfully";
+                }catch(Exception ex)
+                {
+                return ex.Message;
+                }
+            
+            }
+
+        public string DeleteMemberDB(string email)
+            {
+            try
+                {
+                SQLiteConnection connection = new SQLiteConnection(connect_string);
+                connection.Open();
+                string sql = "DELETE FROM member  WHERE email = @email";
+                SQLiteCommand cmd = new SQLiteCommand(sql, connection);
+                using (cmd)
+                    {
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.ExecuteNonQuery();
+                    }
+                connection.Close();
+                return "Deleted successfully";
+                }catch (Exception ex)
+                {
+                return ex.Message;
+                }
+            }
+
 
 
 

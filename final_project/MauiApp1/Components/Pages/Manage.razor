@@ -1,14 +1,25 @@
 ﻿@page "/Manage"
 
-<h3>Manage Membership</h3>
 
 <style>
     p {
         display: inline-block;
         margin-right: 80px;
     }
+    button{
+        margin-right: 20px;
+        border: 1px solid lightblue;
+        border-radius: 5px;
+    }
+    td{
+        width:20%;
+        font:25px;
+    }
 </style>
 
+
+
+<h3>Manage Membership</h3>
 <section>
    <table>
         <tr><td>First Name</td> <td>Last Name</td> <td>Email</td></tr>
@@ -18,27 +29,85 @@
                 <td>@m.FirstName</td>
                 <td>@m.LastName</td>
                 <td>@m.EmailAddress</td>
-                <button>Edit</button>
-                <button>Delete</button>
+              
+                <button @onclick= "()=> ReceiveMember(m)">Edit</button>
+                <button @onclick = "()=>RemoveMember(m)">Delete</button>
             </tr>
             }
-
-
-
    </table>
-
-    
 </section>
-
+@if (edit)
+    {
+    <section>
+        <div>
+            <label>First name:</label>
+            <input @bind="first_name" />
+        </div>
+        <div>
+            <label>Last name:</label>
+            <input @bind="last_name" />
+        </div>
+        <div>
+            <label>Email:</label>
+            <input @bind="email" />
+        </div>
+         <button @onclick="UpdateMember">Confirm</button> 
+    </section>
+    }
+@if(delete)
+    {
+    <div><h6>Do you want to delete?</h6>
+        <button @onclick="CancelToDelete">No</button>  <button @onclick="ConfirmToDelete">Yes</button>
+    </div>
+    }
+<p>@message</p>
 
 
 
 
 @code {
+
     List<Member> members = MemberManager.RetriveMember();
+    string email;
+    string first_name;
+    string last_name;
+    bool edit = false;
+    bool delete = false;
+    bool confirmed = false;
+    string message;
+
+    void ReceiveMember(Member member)
+        {
+        edit = true;
+        first_name = member.FirstName;
+        last_name = member.LastName;
+        email = member.EmailAddress;
+
+        }
+
+    void UpdateMember()
+        {
+        message =  MemberManager.EditMember(first_name, last_name, email);
+        }
 
 
+    void RemoveMember(Member member)
+        {
+        delete = true;  
+        email = member.EmailAddress;
+        }
 
+
+    void ConfirmToDelete()
+        {
+        message = MemberManager.DeleteMember(email);
+        delete = false;
+        }
+
+    void CancelToDelete()
+        {
+        delete = false;
+        }
 }
 
 

@@ -12,7 +12,7 @@ namespace MauiApp1.Components.Pages
         private string last_name;
         private string email_address;
         private string password;
-
+ 
         public Member(string first_name, string last_name, string email, string password) {
             this.FirstName = first_name;
             this.LastName = last_name;
@@ -23,6 +23,7 @@ namespace MauiApp1.Components.Pages
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
+        
 
         }
     }
