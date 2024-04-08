@@ -12,6 +12,7 @@ namespace MauiApp1.Components.Pages
         private string last_name;
         private string email_address;
         private string password;
+        
  
         public Member(string first_name, string last_name, string email, string password) {
             this.FirstName = first_name;

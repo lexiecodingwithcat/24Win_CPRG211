@@ -111,7 +111,7 @@ namespace MauiApp1.Components.Pages
             {
             DBhandler db = new DBhandler();
             string message = db.DeleteMemberDB(email);
-            RetriveMember() ;
+            RetriveMember();
             return message;
             }
 
